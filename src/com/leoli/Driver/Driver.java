@@ -6,7 +6,7 @@ import com.leoli.Validations.Validation;
 
 public class Driver extends SuperDriver {
 
-    private Validation validation;
+    private Validation validation = new Validation();
 
     public static void main(String[] args) {
 
@@ -63,6 +63,9 @@ public class Driver extends SuperDriver {
     public void runMenu() {
 
         int option = getOption();
+        if (option == 0) {
+            System.out.println("\033[34m\n\nExiting Program...\033[0m\n");
+        }
         while (option != 0) {
             switch (option) {
                 case 1  ->  addAndStart();

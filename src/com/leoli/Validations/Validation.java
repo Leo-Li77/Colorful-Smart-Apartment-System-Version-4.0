@@ -1,9 +1,7 @@
 package com.leoli.Validations;
 
 import java.util.List;
-import java.util.Scanner;
 
-import com.leoli.Student.StudentApartment;
 import com.leoli.Student.StudentApartment;
 
 

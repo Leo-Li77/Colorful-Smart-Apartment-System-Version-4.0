@@ -3,6 +3,11 @@ package com.leoli.FunctionStore;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.awt.Desktop;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import com.leoli.Student.StudentApartment;
 import com.leoli.Validations.Validation;
 import com.leoli.FunctionStore.Functions;
@@ -37,7 +42,7 @@ public class SuperDriver {
         System.out.print("\033[33m[Enter student ID]   \033[0m");
         String studentIDForTest = input.nextLine();
         while (!validation.judgeID(studentIDForTest) || !validation.judgeUniqueID(studentIDForTest, studentStore)) {
-            if (validation.judgeUniqueID(studentIDForTest, studentStore)) {
+            if (!validation.judgeUniqueID(studentIDForTest, studentStore)) {
                 System.out.print("\033[33m[This student ID is already registered] \033[0m");
                 studentIDForTest = input.nextLine();
             } else {
@@ -282,18 +287,35 @@ public class SuperDriver {
 
     // The option 6 : Accommodation Notice
     protected void accommodationNotice() {
-        System.out.println(
-                """
-                               \033[96m\n-----------------------
-                                 Accommodation Notice
-                               -----------------------
-                               1. Keep Quiet: Do not make loud noises after 23:30, open and close doors softly.
-                               2. Shared Hygiene: take turns cleaning, clean up garbage daily, and arrange items neatly.
-                               3. Save Resources: Turn off the lights and water at will, and use electrical appliances reasonably.
-                               4. Friendship and Mutual Assistance: Respect differences, get along harmoniously, and communicate minor conflicts in a timely manner.
-                               5. Safety First: Do not use illegal electrical appliances and lock doors and windows when leaving the dormitory.\033[0m
-                               """
-        );
+
+        String resourcePath = "com/leoli/Files/Accomendation Notice.html";
+
+        try (InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            if (resourceStream == null) {
+                System.err.println("\033[91m❌ HTML resource not found in classpath: " + resourcePath + "\033[0m");
+                return;
+            }
+
+            // 创建临时文件
+            Path tempFile = Files.createTempFile("dormitory_agreement_", ".html");
+            Files.copy(resourceStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+            // 自动用浏览器打开
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(tempFile.toUri());
+                System.out.println("\033[96m✅ Dormitory agreement opened in browser.\033[0m");
+
+                // 可选：程序退出时删除临时文件（但浏览器可能还在用，慎删）
+                // tempFile.toFile().deleteOnExit();
+            } else {
+                System.out.println("\033[93m⚠️  Cannot open browser. File saved temporarily at: " + tempFile + "\033[0m");
+            }
+
+        } catch (IOException e) {
+            System.err.println("\033[91m❌ Failed to open dormitory agreement: " + e.getMessage() + "\033[0m");
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -357,6 +379,7 @@ public class SuperDriver {
     } // End of deleteStudent()
 
 
+    // The option 9
     protected void searchStudentWithName() {
 
         System.out.println("\033[36m\n--------------------------\033[0m");
@@ -367,6 +390,7 @@ public class SuperDriver {
             System.out.println("\033[36m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
         } else {
 
+            System.out.print("\"\\033[36m[Enter a name to search]]\\033[0m\"");
             String name = input.nextLine().trim();
 
             boolean flag = false;
@@ -381,6 +405,7 @@ public class SuperDriver {
             }
 
         }
-    }
-}
+    } // End of SearchStudentWithName()
+
+} // End of SuperDriver Class
 

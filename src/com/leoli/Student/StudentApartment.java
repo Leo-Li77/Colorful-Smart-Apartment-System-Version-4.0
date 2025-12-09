@@ -43,105 +43,56 @@ public class StudentApartment {
     }
 
 
-    // Validation for Name
-    private boolean judgeName(String name) {
-        if (name.length() < 2 || name.trim().isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-
-    // Validation for studentID (whether all of which is number and have 12 elements)
-    private boolean judgeID(String studentID) {
-        boolean flag = true;
-        if (studentID.length() != 12) {
-            flag = false;
-        }
-        try {
-            Long.parseLong(studentID);
-        } catch (NumberFormatException e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-
-    // Validation for Phone Number (whether all of which is number and have 11 elements)
-    private boolean judgePhoneNumber(String telephoneNumber) {
-        boolean flag = true;
-        if (telephoneNumber.length() != 11) {
-            flag = false;
-        }
-        try {
-            Long.parseLong(telephoneNumber);
-        } catch (NumberFormatException e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-
-
     // Setters and Getters
     public String getName() {
         return name;
     }
+
     public String getStudentID() {
         return studentID;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
 
     public void setName(String name) {
-        if (judgeName(name)) {
-            this.name = name;
-        }
+        this.name = name;
     }
+
     public void setStudentID(String studentID) {
-        if (judgeID(studentID)) {
             this.studentID = studentID;
-        }
     }
+
     public void setPhoneNumber(String phoneNumber) {
-        if (judgePhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
-        }
     }
 
 
     public void cancelTerm(int serialNumber) {
-
         if (iterms.get(serialNumber) == 1) {
             iterms.set(serialNumber, 3);
         }
-
     } // End of cancelTerm()
 
 
     public void applicationSuccess(int serialNumber) {
-
         if (iterms.get(serialNumber) == 1) {
             iterms.set(serialNumber, 2);
         }
-
     } // End of applicationSuccess()
 
 
     public void applicationFailed(int serialNumber) {
-
         if (iterms.get(serialNumber) == 1) {
             iterms.set(serialNumber, 3);
         }
-
     } // End of applicationFailed()
 
 
     @Override
     public String toString() {
-
         return "\n{\n" +
                 "\033[92m<Name>                                   \033[0m" + name + "\n" +
                 "\033[92m<Student ID>                             \033[0m" + studentID + "\n" +
@@ -156,8 +107,6 @@ public class StudentApartment {
                 "\033[92m  [Activity Room Borrowing Application]  \033[0m" + status.get(iterms.get(6)) + "\n" +
                 "\033[92m  [Accommodation Notice]                 \033[0m" + status.get(iterms.get(7)) + "\n" +
                 "}";
-
     } // End of toString()
-
 
 } // End of StudentApartment Class

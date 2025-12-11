@@ -47,8 +47,8 @@ public class Driver extends SuperDriver {
                 """));
 
         int option = 1;
+        System.out.print(colorStore.blue("[Enter option to handle] "));
         while (true) {
-            System.out.print(colorStore.blue("[Enter option to handle] "));
             String optionForTest = input.nextLine();
 
             if (!validation.judgeIsInt(optionForTest)) {

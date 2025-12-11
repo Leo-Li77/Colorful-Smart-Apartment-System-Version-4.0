@@ -82,8 +82,9 @@ public class SuperDriver {
                 """));
 
         int startProjectNumber = 1;
+        System.out.print(colorStore.yellow("[Enter your project number to start] "));
         while (true) {
-            System.out.print(colorStore.yellow("[Enter your project number to start] "));
+
             String startProjectNumberForTest = input.nextLine();
 
             if (!validation.judgeIsInt(startProjectNumberForTest)) {
@@ -148,8 +149,9 @@ public class SuperDriver {
                     """));
 
             int option = 1;
+            System.out.print(colorStore.green("[Enter your project number] "));
             while (true) {
-                System.out.print(colorStore.green("[Enter your project number] "));
+
                 String optionForTest = input.nextLine();
 
                 if (!validation.judgeIsInt(optionForTest)) {
@@ -212,8 +214,8 @@ public class SuperDriver {
                     7) Activity Room Borrowing Application
                     """));
             int itermNumber = 1;
+            System.out.print(colorStore.purple("[Enter your project number to start] "));
             while (true) {
-                System.out.print(colorStore.purple("[Enter your project number to start] "));
                 String startProjectNumberForTest = input.nextLine();
 
                 if (!validation.judgeIsInt(startProjectNumberForTest)) {
@@ -241,9 +243,9 @@ public class SuperDriver {
                     """));
 
             int option = 1;
+            System.out.print(colorStore.purple("[Enter your option to update] "));
             while (true) {
-                System.out.print(colorStore.purple("[Enter your option to update] "));
-                String optionForTest = input.nextLine();
+                String optionForTest = input.nextLine().trim();
 
                 if (!validation.judgeIsInt(optionForTest)) {
                     System.out.print(colorStore.red("[Please enter an integer option] "));

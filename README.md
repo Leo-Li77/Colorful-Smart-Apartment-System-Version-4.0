@@ -1,5 +1,5 @@
 # Student Apartment System V4.0
-- [Click Here to Jump to V4.0](https://github.com/Leo-Li77/Smart-Apartment-System-Version-4.0.git)
+- [Click Here to Jump to V4.0](https://github.com/Leo-Li77/Colorful-Smart-Apartment-System-Version-4.0.git)
 ## Basic Information
 ### Version : V4.0
 - **A Brand New Underlying Architecture**
